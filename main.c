@@ -126,7 +126,10 @@ I32 main(int argc, char **argv) {
     enableRawMode();  
     srand(time(NULL));
     
-    bool info = (argc > 1 && strcmp(argv[1], "--info") ==0 || strcmp(argv[1], "-i")==0);     
+    bool info = false;     
+    if (argc > 1)  {
+        info =strcmp(argv[1], "--info") == 0 || strcmp(argv[1], "-i") == 0;
+    } 
     
     /* initialization */
     Snake snake = {0};
