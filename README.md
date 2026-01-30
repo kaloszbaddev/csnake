@@ -1,6 +1,6 @@
 # Snake Terminal Game
 
-![image] (path/to/image)
+![image] (./other/snake.png)
 
 game uses termios struct and linux syscall so it won't work on Windows
 
