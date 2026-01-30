@@ -93,16 +93,23 @@ void snake_reset(Snake *s) {
       snake_init(s);
 }
 
-bool snake_in(Snake *s, vec2i pos) {
+bool snake_in(Snake *s) {
     vec2i head = * s->body;
     for (I32 i=1;i<s->cnt;++i) {
         vec2i seg = s->body[i];
         if (head.x == seg.x &&
-            head.y == seg.y 
-            ||
-            head.x == pos.x &&
-            head.y == pos.y)
+            head.y == seg.y) 
             return true; 
+    }
+    return false;
+}
+
+bool snake_inapple(Snake *s, vec2i apple) {
+    for (I32 i=0;i<s->cnt;++i) {
+        vec2i seg = s->body[i];
+        if (seg.x == apple.x &&
+            seg.y == apple.y)
+            return true;
     }
     return false;
 }
@@ -128,7 +135,7 @@ I32 main(int argc, char **argv) {
     
     bool info = false;     
     if (argc > 1)  {
-        info =strcmp(argv[1], "--info") == 0 || strcmp(argv[1], "-i") == 0;
+        info = strcmp(argv[1], "--info") == 0 || strcmp(argv[1], "-i") == 0;
     } 
     
     /* initialization */
@@ -178,7 +185,7 @@ I32 main(int argc, char **argv) {
         if (c=='g') snake_add(&snake, last);
         else if (c=='r') snake_reset(&snake); 
 
-        if (snake_in(&snake, (vec2i){-1, -1})) snake_reset(&snake); 
+        if (snake_in(&snake)) snake_reset(&snake); 
         if (head.x >= COLS || head.x < 0 || head.y >= ROWS || head.y < 0) snake_reset(&snake);
         /* SNAKE LOGIC */
 
@@ -189,7 +196,7 @@ I32 main(int argc, char **argv) {
                 apple.x = rand() % COLS;
                 apple.y = rand() % ROWS;
             }
-            while (snake_in(&snake, apple));
+            while (snake_inapple(&snake, apple));
             snake_add( &snake, last);
         }
         /* APPLE LOGIC */
