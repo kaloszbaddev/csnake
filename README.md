@@ -1,6 +1,6 @@
 # Snake Terminal Game
 
-![Snake](other/snake.png)
+![Snake](assets/snake.png)
 
 game uses termios struct and linux syscall so it won't work on Windows
 
@@ -17,10 +17,3 @@ build is simple
 $ gcc -o csnake main.c && ./csnake
 ```
 
-## Other
-you can run the game with flag -i or --info
-to see snake parameters
-
-```
-$ ./csnake -i
-```

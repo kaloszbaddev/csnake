@@ -129,15 +129,10 @@ void draw_win(void) {
     }
 }
 
-I32 main(int argc, char **argv) {
+I32 main(void) {
     enableRawMode();  
     srand(time(NULL));
-    
-    bool info = false;     
-    if (argc > 1)  {
-        info = strcmp(argv[1], "--info") == 0 || strcmp(argv[1], "-i") == 0;
-    } 
-    
+   
     /* initialization */
     Snake snake = {0};
     vec2i apple = { rand() % COLS, rand() % ROWS };
@@ -212,14 +207,6 @@ I32 main(int argc, char **argv) {
         
         draw_win();                
         
-        if (info) {
-            const char *names[] = {"HEAD", "SEG"};
-            printf("cap: %d cnt: %d\n", snake.cap, snake.cnt);
-            for (I32 i=0;i<snake.cnt && i < 10; ++i) {
-                printf("x: %02d y: %02d (%s)\n", snake.body[i].x, snake.body[i].y, names[i!=0]); 
-            }
-        }
-
         /* small delay */
         usleep(200 * 1000); 
     }   
