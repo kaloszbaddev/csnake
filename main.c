@@ -11,7 +11,7 @@ typedef unsigned int U32;
 typedef signed int I32;
 typedef unsigned char U8;
 
-#define COLS 15
+#define COLS 15 
 #define ROWS 15
 #define START_SIZE 3
 
@@ -81,7 +81,7 @@ void snake_init(Snake *s) {
     int centerX = COLS / 2;
     int centerY = ROWS / 2;
     for (I32 i=START_SIZE-1; i>=0; --i) {
-        vec2i vec = {centerY + i - START_SIZE, centerX};
+        vec2i vec = {centerX + i - START_SIZE, centerY};
         snake_add(s, vec);
     } 
 }
@@ -138,7 +138,7 @@ I32 main(void) {
     vec2i apple = { rand() % COLS, rand() % ROWS };
     
     snake_init(&snake);
-
+    
     while (1) {
         /* clear screen */
         printf("\e[1;1H\e[2J");
